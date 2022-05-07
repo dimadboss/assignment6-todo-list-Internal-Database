@@ -19,14 +19,19 @@ class TodoListViewModel : AndroidViewModel(App.instance) {
     fun onDelete(todo: TodoEntity) {
         viewModelScope.launch {
             App.todoRepository.deleteTodo(todo)
-            _todoList.postValue(App.todoRepository.selectAllTodos())
+            val newList = _todoList.value?.filterNot { it.id == todo.id }
+            _todoList.postValue(newList)
         }
     }
 
     fun onCheckClicked(todo: TodoEntity) {
         viewModelScope.launch {
-            App.todoRepository.updateTodo(todo.copy(completed = !todo.completed))
-            _todoList.postValue(App.todoRepository.selectAllTodos())
+            val newValue = todo.copy(completed = !todo.completed)
+            App.todoRepository.updateTodo(newValue)
+            val newList = _todoList.value?.map {
+                if (it.id == todo.id) newValue else it
+            }
+            _todoList.postValue(newList)
         }
     }
 
