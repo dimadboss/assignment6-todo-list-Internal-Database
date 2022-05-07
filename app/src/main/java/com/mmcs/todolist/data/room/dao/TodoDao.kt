@@ -6,7 +6,7 @@ import com.mmcs.todolist.data.room.entities.TodoEntity
 @Dao
 interface TodoDao {
 
-    @Query("SELECT * FROM ${TodoEntity.TABLE_NAME}")
+    @Query("SELECT * FROM ${TodoEntity.TABLE_NAME} ORDER BY timestamp DESC")
     suspend fun selectAllItems(): List<TodoEntity>
 
     @Insert

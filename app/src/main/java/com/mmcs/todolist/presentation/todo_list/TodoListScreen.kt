@@ -52,6 +52,7 @@ fun AddNewItemRow(
                 TodoEntity(
                     title = text,
                     completed = false,
+                    timestamp = System.currentTimeMillis()
                 )
             )
             text = ""

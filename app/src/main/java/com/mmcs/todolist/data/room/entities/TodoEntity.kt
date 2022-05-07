@@ -9,7 +9,8 @@ data class TodoEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0L,
     val title: String,
-    val completed: Boolean = false
+    val completed: Boolean,
+    val timestamp: Long,
 ) {
     companion object {
         const val TABLE_NAME = "todo"
