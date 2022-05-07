@@ -30,19 +30,6 @@ class TodoListViewModel : AndroidViewModel(App.instance) {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun addTodo() {
-        viewModelScope.launch {
-            App.todoRepository.insertTodo(
-                TodoEntity(
-                    title = "Some title. Timestamp ${LocalDateTime.now().nano / 100000}",
-                    completed = Random.nextBoolean()
-                )
-            )
-            _todoList.postValue(App.todoRepository.selectAllTodos())
-        }
-    }
-
     fun addTodo(item: TodoEntity) {
         viewModelScope.launch {
             App.todoRepository.insertTodo(item)

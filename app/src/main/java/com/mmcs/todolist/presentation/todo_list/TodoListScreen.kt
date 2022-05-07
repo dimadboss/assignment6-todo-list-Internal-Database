@@ -21,12 +21,11 @@ import androidx.compose.ui.unit.ExperimentalUnitApi
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.mmcs.todolist.data.room.entities.TodoEntity
 
 @ExperimentalUnitApi
 @Composable
-fun SimpleOutlinedTextFieldSample(
+fun AddNewItemRow(
     viewModel: TodoListViewModel
 ) {
     var text by remember { mutableStateOf("") }
@@ -68,19 +67,11 @@ fun TodoListScreen(
     viewModel: TodoListViewModel = TodoListViewModel()
 ) {
     val todos by viewModel.todoList.observeAsState(initial = emptyList())
-    Scaffold(floatingActionButton = {
-        FloatingActionButton(onClick = { viewModel.addTodo() }) {
-            Icon(
-                Icons.Default.Add,
-                null,
-                tint = Color.White,
-            )
-        }
-    }) {
+    Scaffold {
         it
-        Column() {
-            SimpleOutlinedTextFieldSample(viewModel)
-            LazyColumn() {
+        Column {
+            AddNewItemRow(viewModel)
+            LazyColumn {
                 items(todos) { todo ->
                     TodoElement(todo = todo, onCheckClicked = {
                         viewModel.onCheckClicked(todo)
