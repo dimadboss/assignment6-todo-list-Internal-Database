@@ -38,10 +38,10 @@ class TodoListViewModel : AndroidViewModel(App.instance) {
     }
 
     private val todoListFlow = flow {
-        while (true) {
+        while (_todoList.value.isNullOrEmpty()) {
             val todos = App.todoRepository.selectAllTodos()
             emit(todos)
-            kotlinx.coroutines.delay(500)
+            kotlinx.coroutines.delay(1000)
         }
     }
     private val _todoList = MutableLiveData<List<TodoEntity>>(listOf())
