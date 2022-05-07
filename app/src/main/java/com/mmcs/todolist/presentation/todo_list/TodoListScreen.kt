@@ -45,12 +45,16 @@ fun AddNewItemRow(
             maxLines = 2,
         )
         IconButton(onClick = {
+            if (text.isEmpty()) {
+                return@IconButton
+            }
             viewModel.addTodo(
                 TodoEntity(
                     title = text,
                     completed = false,
                 )
             )
+            text = ""
         }) {
             Icon(
                 Icons.Default.Add,
