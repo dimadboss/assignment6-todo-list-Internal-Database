@@ -1,0 +1,20 @@
+package com.mmcs.todolist.data.room.dao
+
+import androidx.room.*
+import com.mmcs.todolist.data.room.entities.TodoEntity
+
+@Dao
+interface TodoDao {
+
+    @Query("SELECT * FROM ${TodoEntity.TABLE_NAME}")
+    suspend fun selectAllItems(): List<TodoEntity>
+
+    @Insert
+    suspend fun insertItem(todo: TodoEntity)
+
+    @Delete
+    suspend fun deleteItem(todo: TodoEntity)
+
+    @Update
+    suspend fun updateItem(todo: TodoEntity)
+}
