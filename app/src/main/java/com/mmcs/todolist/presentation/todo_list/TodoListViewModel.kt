@@ -1,7 +1,5 @@
 package com.mmcs.todolist.presentation.todo_list
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,8 +10,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
-import java.time.LocalDateTime
-import kotlin.random.Random
 
 class TodoListViewModel : AndroidViewModel(App.instance) {
     fun onDelete(todo: TodoEntity) {
