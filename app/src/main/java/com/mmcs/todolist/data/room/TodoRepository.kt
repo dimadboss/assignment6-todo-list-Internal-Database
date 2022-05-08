@@ -12,4 +12,6 @@ class TodoRepository(private val dictionaryDao: TodoDao) {
     suspend fun deleteTodo(todo: TodoEntity) = dictionaryDao.deleteItem(todo)
 
     suspend fun updateTodo(todo: TodoEntity) = dictionaryDao.updateItem(todo)
+
+    suspend fun getItemByTimestamp(timestamp: Long) : TodoEntity = dictionaryDao.getItemByTimestamp(timestamp)
 }

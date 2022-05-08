@@ -17,4 +17,7 @@ interface TodoDao {
 
     @Update
     suspend fun updateItem(todo: TodoEntity)
+
+    @Query("SELECT * FROM ${TodoEntity.TABLE_NAME} WHERE timestamp=:timestamp ORDER BY timestamp DESC LIMIT 1")
+    suspend fun getItemByTimestamp(timestamp: Long): TodoEntity
 }
