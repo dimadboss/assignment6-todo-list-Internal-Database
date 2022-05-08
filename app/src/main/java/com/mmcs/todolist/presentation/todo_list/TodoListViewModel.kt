@@ -38,7 +38,9 @@ class TodoListViewModel : AndroidViewModel(App.instance) {
     fun addTodo(item: TodoEntity) {
         viewModelScope.launch {
             App.todoRepository.insertTodo(item)
-            _todoList.postValue(App.todoRepository.selectAllTodos())
+            val inserted = App.todoRepository.getItemByTimestamp(item.timestamp)
+            val newList = listOf(inserted) + (_todoList.value ?: listOf())
+            _todoList.postValue(newList)
         }
     }
 
